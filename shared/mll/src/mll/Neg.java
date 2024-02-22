@@ -13,13 +13,15 @@ public class Neg extends UnOp {
     public static Op c(Op arg) {
         var dag = arg.dag();
 
-        if (arg instanceof Lit argLit) {
-            var value = -argLit.get();
-            return dag.lit(value);
-        }
+        if (dag.doRewrite) {
+            if (arg instanceof Lit argLit) {
+                var value = -argLit.get();
+                return dag.lit(value);
+            }
 
-        if (arg instanceof Neg argNeg) {
-            return dag.unify(argNeg.arg());
+            if (arg instanceof Neg argNeg) {
+                return dag.unify(argNeg.arg());
+            }
         }
 
         return dag.unify(new Neg(arg));
@@ -32,7 +34,7 @@ public class Neg extends UnOp {
 
     @Override
     protected Op diff(int inputIdx) {
-        throw new UnsupportedOperationException();
+        return dag().lit(-1);
     }
 
     @Override

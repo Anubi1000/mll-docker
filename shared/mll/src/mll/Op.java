@@ -65,6 +65,7 @@ public abstract class Op {
     public Lit lit2() { return lit(2.f); }
 
     public Op add(Op y) { return Add.c(this, y); }
+    public Op sub(Op y) { return Sub.c(this, y); }
     public Op neg() { return Neg.c(this); }
     public Op exp() { return Exp.c(this); }
     public Op log() { return Log.c(this); }

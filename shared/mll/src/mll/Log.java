@@ -13,10 +13,12 @@ public class Log extends UnOp {
     public static Op c(Op arg) {
         var dag = arg.dag();
 
-        if (arg instanceof Lit argLit) {
-            var value = Math.log(argLit.get());
-            return dag.lit(value);
-        }
+       if (dag.doRewrite) {
+           if (arg instanceof Lit argLit) {
+               var value = Math.log(argLit.get());
+               return dag.lit(value);
+           }
+       }
 
         return dag.unify(new Log(arg));
     }
@@ -28,7 +30,7 @@ public class Log extends UnOp {
 
     @Override
     protected Op diff(int inputIdx) {
-        throw new UnsupportedOperationException();
+        return arg().pow(dag().lit(-1));
     }
 
     @Override

@@ -12,10 +12,14 @@ public class Exp extends UnOp {
     // Smart constructor
     public static Op c(Op arg) {
         var dag = arg.dag();
-        if (arg instanceof Lit argLit) {
-            var value = Math.exp(argLit.get());
-            return dag.lit(value);
+
+        if (dag.doRewrite) {
+            if (arg instanceof Lit argLit) {
+                var value = Math.exp(argLit.get());
+                return dag.lit(value);
+            }
         }
+
         return dag.unify(new Exp(arg));
     }
 
@@ -26,7 +30,7 @@ public class Exp extends UnOp {
 
     @Override
     protected Op diff(int inputIdx) {
-        throw new UnsupportedOperationException();
+        return arg().mul(arg().exp());
     }
 
     @Override
