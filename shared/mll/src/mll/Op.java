@@ -65,10 +65,12 @@ public abstract class Op {
     public Lit lit2() { return lit(2.f); }
 
     public Op add(Op y) { return Add.c(this, y); }
-    public Op mul(Op y) { 
-    	Op mul = null;
-    	return mul;
-    	}
+    public Op neg() { return Neg.c(this); }
+    public Op exp() { return Exp.c(this); }
+    public Op log() { return Log.c(this); }
+    public Op div(Op y) { return Div.c(this, y); }
+    public Op mul(Op y) { return Mul.c(this, y); }
+    public Op pow(Op y) { return Pow.c(this, y); }
 
 
     // -- Compute free variables and operator usages ----------------------------------------------

@@ -10,3 +10,5 @@ shared/.jupyter/
 shared/.local/
 /shared/mll/.ipynb_checkpoints/
 /shared/mll/out/llvm/helloworld-O3.ll
+/shared/mll/.idea/
+/shared/mll/out/production

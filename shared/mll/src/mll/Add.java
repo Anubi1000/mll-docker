@@ -13,6 +13,23 @@ public class Add extends BinOp {
     // Smart constructor
     public static Op c(Op x, Op y) {
         var dag = x.dag();
+
+        /*if (x instanceof Lit xLit && y instanceof Lit yLit) {
+            var value = xLit.get() + yLit.get();
+            return dag.lit(value);
+        }
+
+        if (x instanceof Lit xLit && xLit.is(0)) {
+            return y;
+        }
+        if (y instanceof Lit yLit && yLit.is(0)) {
+            return x;
+        }
+
+        if (x == y) {
+            return x.mul(dag.lit(2));
+        }*/
+
         return dag.unify(new Add(x, y));
     }
 
